@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 class Agent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4o")
-        # QUI DEFINISCI IL TUO SYSTEM MESSAGE
+        #  SYSTEM MESSAGE
         self.system_prompt = "Sei un consulente di viaggi esperto, cordiale e professionale. " \
                              "Il tuo obiettivo è aiutare gli utenti a pianificare itinerari indimenticabili, " \
                              "suggerendo destinazioni, attività e consigli pratici. " \
@@ -16,10 +16,10 @@ class Agent:
         print("Tracing - Messaggi inviati all'LLM:")
         for m in formatted_messages:
             print(f"[{type(m).__name__}]: {m.content[:100]}...") # Stampa i primi 100 caratteri
-        # Inseriamo il System Message come primo messaggio di sistema
+        # Inserisco il System Message come primo messaggio di sistema
         formatted_messages.append(SystemMessage(content=self.system_prompt))
         
-        # Trasformiamo i messaggi ricevuti dal FE
+        # Trasformo i messaggi ricevuti dal FE
         for msg in messages:
             if msg["role"] == "user":
                 formatted_messages.append(HumanMessage(content=msg["content"]))
@@ -29,7 +29,7 @@ class Agent:
                 formatted_messages.append(SystemMessage(content=msg["content"]))
         print(f"AGENT SERVICE: Invio {len(formatted_messages)} messaggi al modello (incluso il system prompt).")
 
-        # Chiamata al modello
+        # Chiamo modello
         response = self.llm.invoke(formatted_messages)
         
         print("AGENT SERVICE: Risposta ricevuta da OpenAI.")
