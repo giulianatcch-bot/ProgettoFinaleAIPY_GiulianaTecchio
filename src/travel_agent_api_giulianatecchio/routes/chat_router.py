@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-# Nota: dovrai creare il file agent_service.py nella cartella services
+
 from src.travel_agent_api_giulianatecchio.services.agent_service import Agent
 
 chat_router = APIRouter()
